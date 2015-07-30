@@ -295,7 +295,7 @@ void MarkerDetector::detectRectangles(vector< cv::Mat > &thresImgv, vector< Mark
 //         cv::cvtColor ( thresImgv[0],input,CV_GRAY2BGR );
 
 #pragma omp parallel for
-    for (size_t i = 0; i < thresImgv.size(); i++) {
+    for (long i = 0; i < thresImgv.size(); i++) {
         std::vector< cv::Vec4i > hierarchy2;
         std::vector< std::vector< cv::Point > > contours2;
         cv::Mat thres2;
@@ -381,7 +381,7 @@ void MarkerDetector::detectRectangles(vector< cv::Mat > &thresImgv, vector< Mark
 
     vector< vector< pair< int, int > > > TooNearCandidates_omp(omp_get_max_threads());
 #pragma omp parallel for
-    for (unsigned int i = 0; i < MarkerCanditates.size(); i++) {
+    for (long i = 0; i < MarkerCanditates.size(); i++) {
         // 	cout<<"Marker i="<<i<<MarkerCanditates[i]<<endl;
         // calculate the average distance of each corner to the nearest corner of the other marker candidate
         for (unsigned int j = i + 1; j < MarkerCanditates.size(); j++) {
@@ -1057,7 +1057,7 @@ void MarkerDetector::findCornerMaxima(vector< cv::Point2f > &Corners, const cv::
 // for each element, search in a region around
 #pragma omp parallel for
 
-    for (size_t i = 0; i < Corners.size(); i++) {
+    for (long i = 0; i < Corners.size(); i++) {
         cv::Point2f minLimit(std::max(0, int(Corners[i].x - wsize)), std::max(0, int(Corners[i].y - wsize)));
         cv::Point2f maxLimit(std::min(grey.cols, int(Corners[i].x + wsize)), std::min(grey.rows, int(Corners[i].y + wsize)));
 
